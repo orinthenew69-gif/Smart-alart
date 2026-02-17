@@ -94,6 +94,8 @@ const DirectChatPage: React.FC = () => {
       return;
     }
 
+    if (!userId) return;
+
     navigator.geolocation.getCurrentPosition((pos) => {
       const newMsg: ChatMessage = {
         id: Date.now().toString(),
@@ -114,6 +116,9 @@ const DirectChatPage: React.FC = () => {
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>, type: MessageType) => {
     const file = e.target.files?.[0];
     if (!file || !userId) return;
+    
+    // Capture userId in a local variable to ensure strict type safety in the closure
+    const targetId = userId;
 
     if (file.size > 2 * 1024 * 1024) {
       alert("File too large for secure transmission. Max 2MB.");
@@ -125,7 +130,7 @@ const DirectChatPage: React.FC = () => {
       const newMsg: ChatMessage = {
         id: Date.now().toString(),
         senderId: myId,
-        receiverId: userId,
+        receiverId: targetId,
         mediaUrl: reader.result as string,
         fileName: file.name,
         type: type,
