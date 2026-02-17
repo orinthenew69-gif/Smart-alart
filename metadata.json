@@ -1,0 +1,9 @@
+{
+  "name": "Safe Women Alert",
+  "description": "Enterprise-grade personal safety application with SOS triggering, live GPS tracking, and AI-powered assistance.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
